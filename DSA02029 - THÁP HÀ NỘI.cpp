@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+
+int n;
+char a = 'A', b = 'B', c = 'C';
+
+void Try(int n, char a, char b, char c){
+	if(n == 1){
+		cout << a << " -> " << c << endl;
+		return;
+	}
+	Try(n - 1, a, c, b);
+	Try(1, a, b, c);
+	Try(n - 1, b, a, c);
+}
+
+void TC(){
+	cin >> n;
+	Try(n, a, b, c);
+}
+
+int main(){
+	int t = 1;
+	//cin >> t;
+	while(t--){
+		TC();
+	}
+	return 0;
+}
+
+	
+
+	
