@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+
+void TC(){
+	int n;
+	cin >> n;
+	int a[n];
+	int res = 0;
+	int in = n;
+	for(int i = 0; i < n; i++){
+		cin >> a[i];
+		if(a[i]){
+			res = i;
+			in = min(in, res);
+		}
+	}
+	cout << in << endl;
+	
+}
+ 
+int main(){
+	int t = 1;
+	cin >> t;
+	while(t--){
+		TC();
+	}
+	return 0;
+}
