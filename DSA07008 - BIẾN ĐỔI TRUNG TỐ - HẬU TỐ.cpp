@@ -25,7 +25,7 @@ void TC() {
 			st.pop();
 		}
 		else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/' || s[i] == '^') {
-			while (!st.empty() && ut (st.top()) >= ut (s[i])) {
+			while (!st.empty() && ut (st.top()) >= ut (s[i])) { // 6 - 5 * 3 ^ 2 ^ 4 * 6;
 				res += st.top();
 				st.pop();
 			}
