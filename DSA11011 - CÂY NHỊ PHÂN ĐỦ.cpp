@@ -2,7 +2,7 @@
  
 using namespace std;
 
-int ok;
+int ok1, ok;
 
 struct node{
 	int data;
@@ -22,9 +22,13 @@ void noi_node (NODE* &t, int b, int c) {
 	if (c == 'R') t->r = new NODE(b);
 }
 
+
 void tao_tree (NODE *t, int a, int b, char c) {
-	if (t == NULL) return;
-	if (t -> data == a) noi_node(t, b, c);
+	if (t == NULL || ok1 == 1) return;
+	if (t -> data == a) {
+		noi_node(t, b, c);
+		ok = 1;
+	}
 	tao_tree (t->l, a, b, c);
 	tao_tree (t->r, a, b, c);
 }
@@ -69,6 +73,7 @@ void TC(){
 	NODE* t = NULL;
 	ok = 1;
 	while (n--) {
+		ok1 = 0;
 		int a, b;
 		char c;
 		cin >> a >> b >> c;
@@ -93,3 +98,4 @@ int main(){
 	}
 	return 0;
 }
+
