@@ -1,56 +1,51 @@
 #include<bits/stdc++.h>
- 
+
 using namespace std;
 
-int n, x, a[25], b[25], ok;
-vector<string> v;
+int n, x, a[25], ok;
+vector<int> res;
 
-void Try(int i, int chisoin, int sum){
-	for(int j = i; j <= n; j++){
+void solve () {
+	cout << "[";
+	for (int i = 0; i < res.size() - 1; i++) {
+		cout << res[i] << " ";
+	}
+	cout << res[res.size() - 1] << "]";
+}
+
+void Try (int i, int sum) {
+	for (int j = i; j <= n; j++) {
+		res.push_back(a[j]);
 		sum += a[j];
-		b[chisoin] = a[j];
-		chisoin++;
-		if(sum == x){
-			string s = "[" + to_string(b[0]);
-			for(int l = 1; l < chisoin; l++){
-				s += " " + to_string(b[l]);
-			}
-			s += "]";
-			v.push_back(s);
+		if (sum == x) {
+			ok = 1;
+			solve();
 		}
-		else if(sum < x){
-			Try(j, chisoin, sum);
-		}
+		else if (sum < x) Try(j, sum);
+		res.pop_back();
 		sum -= a[j];
-		chisoin--;
 	}
 }
 
-void TC(){
-	cin >> n >> x;
+void TC () {
 	ok = 0;
-	for(int i = 1; i <= n; i++){
+	res.clear();
+	cin >> n >> x;
+	for (int i = 1; i <= n; i++) {
 		cin >> a[i];
-	}
+	}	
 	sort(a + 1, a + n + 1);
-	Try(1, 0, 0);
-	if(v.size() == 0){
+	Try(1, 0);
+	if (ok == 0) {
 		cout << -1 << endl;
-		v.clear();
-		return;
 	}
-	//sort(v.begin(), v.end());
-	for(auto x : v){
-		cout << x;
-	}
-	cout << endl;
-	v.clear();
+	else cout << endl;
 }
- 
-int main(){
+
+int main () {
 	int t = 1;
 	cin >> t;
-	while(t--){
+	while (t--) {
 		TC();
 	}
 	return 0;
