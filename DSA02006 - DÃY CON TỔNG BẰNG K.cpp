@@ -1,53 +1,50 @@
 #include<bits/stdc++.h>
- 
+
 using namespace std;
-int n, k, a[15], b[15], ok;
-void Try(int i, int chisoin, int S){ // mang b[] la mang de in ket qua;
-	for(int j = i + 1; j < n; j++){
-		if(S + a[j] == k){
+
+int n, k, a[15], ok;
+vector<int> res;
+
+void solve () {
+	cout << "[";
+	for (int i = 0; i < res.size() - 1; i++) {
+		cout << res[i] << " ";
+	}
+	cout << res[res.size() - 1] << "] ";
+} 
+
+void Try (int i, int sum) {
+	for (int j = i + 1; j <= n; j++) {
+		res.push_back(a[j]);
+		sum += a[j];
+		if (sum == k) {
 			ok = 1;
-			b[chisoin] = a[j];
-			cout << "[";
-			for(int l = 0; l <= chisoin; l++){
-				cout << b[l];
-				if(l != chisoin) cout << " ";
-			}
-			cout << "] ";
-			return;
+			solve();
 		}
-		else if(S + a[j] < k && i < n - 1){
-			b[chisoin] = a[j];
-			chisoin++;
-			S += a[j];
-			Try(j, chisoin, S);
-			chisoin--;
-			S -= a[j];
-		}
+		else if (sum < k) Try(j, sum);
+		sum -= a[j];
+		res.pop_back();
 	}
 }
- 
-void inraketqua(){
+
+void TC () {
+	ok = 0;
+	res.clear();
 	cin >> n >> k;
-	for(int i = 0; i < n; i++){
+	for (int i = 1; i <= n; i++) {
 		cin >> a[i];
 	}
-	sort(a, a + n);
-	ok = 0;
-	Try(-1, 0, 0);
-	if(ok == 0){
-		cout << -1 << endl;
-		return;
-	}
-	cout << endl;
+	sort(a + 1, a + n + 1);
+	Try(0, 0);
+	if (ok) cout << endl;
+	else cout << -1 << endl;
 }
  
-int main(){
+int main () {
 	int t = 1;
 	cin >> t;
-	while(t--){
-		inraketqua();
+	while (t--) {
+		TC();
 	}
 	return 0;
 }
-	
-
